@@ -21,5 +21,5 @@ public class Business extends BaseModel{
 
     @OneToMany(mappedBy = "business")
     @Fetch(FetchMode.SELECT)
-    private List<Service> services;
+    private List<ServiceModel> services;
 }

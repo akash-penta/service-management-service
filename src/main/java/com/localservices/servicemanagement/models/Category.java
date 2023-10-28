@@ -21,5 +21,5 @@ public class Category extends BaseModel{
 
     @OneToMany(mappedBy = "category")
     @Fetch(FetchMode.SELECT)
-    private List<Service> services;
+    private List<ServiceModel> services;
 }

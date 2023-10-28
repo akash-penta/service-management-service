@@ -13,8 +13,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-@Entity
-public class Service extends BaseModel{
+@Entity(name = "service")
+public class ServiceModel extends BaseModel{
     private String serviceName;
     private String description;
 
