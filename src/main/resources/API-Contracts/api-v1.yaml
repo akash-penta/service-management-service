@@ -13,7 +13,7 @@ tags:
   - name: business
     description: Operations about business
 paths:
-  /service:
+  /services:
     post:
       tags:
         - service
@@ -25,7 +25,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Service'
+              $ref: '#/components/schemas/ServiceRequest'
         required: true
       responses:
         '200':
@@ -33,9 +33,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Service'
-        '405':
-          description: Invalid input
+                $ref: '#/components/schemas/ServiceResponse'
+        '404':
+          description: 'Service name and Business name are cant be empty'
     get:
       tags:
         - service
@@ -50,8 +50,32 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Service'
-  /service/{serviceId}:
+                  $ref: '#/components/schemas/ServiceResponse'
+  /services/{serviceName}:
+    get:
+      tags:
+        - service
+      summary: Finds service by name
+      description: Search service by name
+      operationId: getServiceByName
+      parameters:
+        - name: serviceName
+          in: path
+          description: ID of service to return
+          required: true
+          schema:
+            type: string
+            format: uuid2
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceResponse'
+        '404':
+          description: 'Service not found with id: XXXX'
+  /services/{serviceId}:
     get:
       tags:
         - service
@@ -72,16 +96,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Service'
-        '400':
-          description: Invalid ID supplied
+                $ref: '#/components/schemas/ServiceResponse'
         '404':
-          description: Service not found
+          description: 'Service not found with id: XXXX'
     put:
       tags:
         - service
       summary: Update service
-      description: Updating service details.
+      description: Updating service details(Service name, description, category name).
       operationId: updateService
       parameters:
         - name: serviceId
@@ -95,18 +117,16 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Service'
+              $ref: '#/components/schemas/UpdateServiceRequest'
       responses:
         '200':
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Service'
-        '400':
-          description: Invalid ID supplied
+                $ref: '#/components/schemas/ServiceResponse'
         '404':
-          description: Service not found
+          description: 'Service not found with id: XXXX'
     delete:
       tags:
         - service
@@ -127,9 +147,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Service'
-        '400':
-          description: Invalid service value
+                $ref: '#/components/schemas/ServiceResponse'
+        '404':
+          description: 'Service not found with id: XXXX'
 components:
   schemas:
     Service:
@@ -159,6 +179,52 @@ components:
             wrapped: true
           items:
             $ref: '#/components/schemas/Category'
+    ServiceRequest:
+      type: object
+      properties:
+        serviceName:
+          type: string
+          example: "Clothing service"
+        description:
+          type: string
+          example: "This service is for clothing"
+        businessName:
+          type: string
+          example: "ABC business"
+        categoryName:
+          type: string
+          example: "cloth"
+    ServiceResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid2
+          example: 123456789
+        serviceName:
+          type: string
+          example: "Clothing service"
+        description:
+          type: string
+          example: "This service is for clothing"
+        businessName:
+          type: string
+          example: "ABC business"
+        categoryName:
+          type: string
+          example: "cloth"
+    UpdateServiceRequest:
+      type: object
+      properties:
+        serviceName:
+          type: string
+          example: "Clothing service"
+        description:
+          type: string
+          example: "This service is for clothing"
+        categoryName:
+          type: string
+          example: "cloth"
     Business:
       type: object
       properties:
