@@ -19,8 +19,8 @@ public class ControllerAdvices {
     @ExceptionHandler(UnableToCreateServiceException.class)
     public ResponseEntity<ExceptionDto> handleUnableToCreateServiceException(UnableToCreateServiceException unableToCreateServiceException) {
         return new ResponseEntity(
-                new ExceptionDto(HttpStatus.NOT_FOUND, unableToCreateServiceException.getMessage()),
-                HttpStatus.NOT_FOUND
+                new ExceptionDto(HttpStatus.BAD_REQUEST, unableToCreateServiceException.getMessage()),
+                HttpStatus.BAD_REQUEST
         );
     }
 
