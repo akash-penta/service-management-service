@@ -6,6 +6,8 @@ import com.localservices.servicemanagement.dtos.UpdateServiceRequestDto;
 import com.localservices.servicemanagement.exceptions.NotFoundException;
 import com.localservices.servicemanagement.exceptions.UnableToCreateServiceException;
 import com.localservices.servicemanagement.services.ServicesService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,7 +26,7 @@ public class ServicesController {
     }
 
     @PostMapping
-    public ServiceResponseDto createService(@RequestBody ServiceRequestDto serviceRequestDto)
+    public ResponseEntity<ServiceResponseDto> createService(@RequestBody ServiceRequestDto serviceRequestDto)
             throws UnableToCreateServiceException {
         ServiceResponseDto responseDto = servicesService.createService(
                 serviceRequestDto.getServiceName(),
@@ -32,7 +34,7 @@ public class ServicesController {
                 serviceRequestDto.getBusinessName(),
                 serviceRequestDto.getCategoryName()
         );
-        return responseDto;
+        return new ResponseEntity<>(responseDto, HttpStatus.CREATED);
     }
 
     @GetMapping("/{serviceId}")
@@ -61,8 +63,7 @@ public class ServicesController {
         ServiceResponseDto responseDto = servicesService.updateServiceById(
                 UUID.fromString(serviceId),
                 updateServiceRequestDto.getServiceName(),
-                updateServiceRequestDto.getDescription(),
-                updateServiceRequestDto.getCategoryName()
+                updateServiceRequestDto.getDescription()
         );
         return responseDto;
     }

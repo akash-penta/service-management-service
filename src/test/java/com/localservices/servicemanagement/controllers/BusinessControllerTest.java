@@ -39,17 +39,17 @@ public class BusinessControllerTest {
 
         ServiceResponseDto responseDto1 = new ServiceResponseDto();
         responseDto1.setId(UUID.randomUUID());
-        responseDto1.setServiceName("Clothing Service");
-        responseDto1.setDescription("This service is for clothing");
+        responseDto1.setServiceName("Mobile sales and repairs");
+        responseDto1.setDescription("This service is for mobiles");
         responseDto1.setBusinessName("ABC business");
-        responseDto1.setCategoryName("Cloth");
+        responseDto1.setCategoryName("ELECTRONICS");
 
         ServiceResponseDto responseDto2 = new ServiceResponseDto();
         responseDto2.setId(UUID.randomUUID());
-        responseDto2.setServiceName("Mens Clothing Service");
-        responseDto2.setDescription("This service is for clothing");
-        responseDto2.setBusinessName("ZXC business");
-        responseDto2.setCategoryName("Cloth");
+        responseDto2.setServiceName("Bike sales and repairs");
+        responseDto2.setDescription("This service is for Bikes");
+        responseDto2.setBusinessName("ABC business");
+        responseDto2.setCategoryName("AUTOMOBILES");
 
         List<ServiceResponseDto> responseDtos = new ArrayList<>();
         responseDtos.add(responseDto1);

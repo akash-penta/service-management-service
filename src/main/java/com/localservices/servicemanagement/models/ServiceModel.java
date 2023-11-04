@@ -1,9 +1,6 @@
 package com.localservices.servicemanagement.models;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,7 +19,6 @@ public class ServiceModel extends BaseModel{
     @JoinColumn(name = "business")
     private Business business;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST})
-    @JoinColumn(name = "category")
+    @Enumerated
     private Category category;
 }

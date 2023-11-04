@@ -23,9 +23,9 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
-    @GetMapping("/{categoryId}")
-    public List<ServiceResponseDto> getServicesByCategoryId(@PathVariable String categoryId) throws NotFoundException {
-        List<ServiceResponseDto> responseDtos = categoryService.getServicesByCategoryId(UUID.fromString(categoryId));
+    @GetMapping("/{categoryName}")
+    public List<ServiceResponseDto> getServicesByCategoryName(@PathVariable String categoryName) {
+        List<ServiceResponseDto> responseDtos = categoryService.getServicesByCategoryName(categoryName);
         return responseDtos;
     }
 }
