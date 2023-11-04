@@ -38,25 +38,25 @@ public class ServicesController {
     }
 
     @GetMapping("/{serviceId}")
-    public ServiceResponseDto getServiceById(@PathVariable String serviceId) throws NotFoundException {
+    public ResponseEntity<ServiceResponseDto> getServiceById(@PathVariable String serviceId) throws NotFoundException {
         ServiceResponseDto responseDto = servicesService.getServiceById(UUID.fromString(serviceId));
-        return responseDto;
+        return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }
 
     @GetMapping("/search/{serviceName}")
-    public List<ServiceResponseDto> getAllServicesByName(@PathVariable String serviceName) throws NotFoundException {
+    public ResponseEntity<List<ServiceResponseDto>> getAllServicesByName(@PathVariable String serviceName) throws NotFoundException {
         List<ServiceResponseDto> responseDtos = servicesService.getAllServicesByName(serviceName);
-        return responseDtos;
+        return new ResponseEntity<>(responseDtos, HttpStatus.OK);
     }
 
     @GetMapping
-    public List<ServiceResponseDto> getAllServices() {
+    public ResponseEntity<List<ServiceResponseDto>> getAllServices() {
         List<ServiceResponseDto> responseDtos = servicesService.getAllServices();
-        return responseDtos;
+        return new ResponseEntity<>(responseDtos, HttpStatus.OK);
     }
 
     @PutMapping("/{serviceId}")
-    public ServiceResponseDto updateServiceById(
+    public ResponseEntity<ServiceResponseDto> updateServiceById(
             @PathVariable String serviceId,
             @RequestBody UpdateServiceRequestDto updateServiceRequestDto
     ) throws NotFoundException {
@@ -65,12 +65,12 @@ public class ServicesController {
                 updateServiceRequestDto.getServiceName(),
                 updateServiceRequestDto.getDescription()
         );
-        return responseDto;
+        return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }
 
     @DeleteMapping("/{serviceId}")
-    public ServiceResponseDto deleteServiceById(@PathVariable String serviceId) throws NotFoundException {
+    public ResponseEntity<ServiceResponseDto> deleteServiceById(@PathVariable String serviceId) throws NotFoundException {
         ServiceResponseDto responseDto = servicesService.deleteServiceById(UUID.fromString(serviceId));
-        return responseDto;
+        return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }
 }
